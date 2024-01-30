@@ -1,6 +1,6 @@
 package utilities;
 
-public class UsefulLinks {
+public class Links {
 
     //URL
     public static String MAIN_PAGE = "https://stellarburgers.nomoreparties.site";

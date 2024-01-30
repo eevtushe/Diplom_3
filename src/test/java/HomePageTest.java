@@ -2,14 +2,15 @@ import io.qameta.allure.Description;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
-import utilities.UsefulLinks;
+import utilities.Links;
 import java.util.concurrent.TimeUnit;
 
 public class HomePageTest extends BaseTest {
+
     @Before
     public void setUp() {
         webDriver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-        webDriver.get(UsefulLinks.MAIN_PAGE);
+        webDriver.get(Links.MAIN_PAGE);
     }
 
     @Test

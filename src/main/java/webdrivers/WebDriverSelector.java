@@ -12,7 +12,12 @@ public class WebDriverSelector {
             webDriver = new ChromeDriver();
         } else if ("Yandex Browser".equals(browserName)) {
             ChromeOptions options = new ChromeOptions();
-            options.setBinary("/Applications/Yandex.app/Contents/MacOS/Yandex");
+            String yandexBinaryPath = System.getProperty("yandex.binary.path");
+            if (yandexBinaryPath != null && !yandexBinaryPath.isEmpty()) {
+                options.setBinary(yandexBinaryPath);
+            } else {
+                throw new RuntimeException("Не указан путь к Yandex Browser");
+            }
             webDriver = new ChromeDriver(options);
         } else {
             throw new RuntimeException("Некорректное имя браузера");

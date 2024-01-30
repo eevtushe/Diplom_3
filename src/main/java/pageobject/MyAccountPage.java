@@ -6,7 +6,9 @@ import org.openqa.selenium.WebDriver;
 
 public class MyAccountPage {
     WebDriver webDriver;
-    private By logOutButton = By.xpath(".//button[text()='Выход']");
+    //private By logOutButton = By.xpath(".//button[text()='Выход']");
+    private By logOutButton = By.xpath(".//button[contains(text(),'Выход')]");
+
 
     public MyAccountPage(WebDriver webDriver) {
         this.webDriver = webDriver;

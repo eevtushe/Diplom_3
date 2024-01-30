@@ -2,9 +2,13 @@ import pageobject.*;
 import org.junit.After;
 import org.openqa.selenium.WebDriver;
 import webdrivers.WebDriverSelector;
+import utilities.ApiHelper;
+import org.apache.commons.lang3.RandomStringUtils;
 
 public class BaseTest {
-    WebDriver webDriver = WebDriverSelector.get("Chrome Browser");
+    private static final String BROWSER_NAME = System.getenv("BROWSER_NAME");
+
+    WebDriver webDriver = WebDriverSelector.get(BROWSER_NAME);
 
     SignInPage signInPage = new SignInPage(webDriver);
     HomePage homePage = new HomePage(webDriver);
@@ -12,18 +16,26 @@ public class BaseTest {
     PasswordRecoverPage passwordRecoverPage = new PasswordRecoverPage(webDriver);
     MyAccountPage myAccountPage = new MyAccountPage(webDriver);
 
-    protected static String EMAIL = "eevtushe@gmail.com";
-    protected static String PASSWORD = "qwerty12345";
-    protected static String WRONG_PASSWORD = "qwerty5432";
-    protected static String NAME = "Name";
-    protected static String TOKEN;
+    protected static String email = generateRandomEmail();
+    protected static String password = RandomStringUtils.randomAlphanumeric(10);
+    protected static String wrongPassword = RandomStringUtils.randomAlphanumeric(10);
+    protected static String name = generateRandomName();
+    protected static String token;
+
+    private static String generateRandomEmail() {
+        return "user" + RandomStringUtils.randomAlphanumeric(5) + "@yandex.ru";
+    }
+
+    private static String generateRandomName() {
+        return "User" + RandomStringUtils.randomAlphabetic(5);
+    }
 
     @After
     public void tearDownAndClearData() {
         webDriver.close();
-        TOKEN = SignUpPage.getToken(EMAIL, PASSWORD);
-        if (TOKEN != null) {
-            SignUpPage.deleteUser(TOKEN);
+        String authToken = ApiHelper.getToken(email, password);
+        if (authToken != null) {
+            ApiHelper.deleteUser(authToken);
         }
     }
 }

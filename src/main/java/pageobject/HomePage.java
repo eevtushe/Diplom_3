@@ -20,6 +20,7 @@ public class HomePage {
     private By burgerConstructionButton = (By.xpath(".//p[@class='AppHeader_header__linkText__3q_va ml-2']"));
     private By makeAnOrderButton = (By.xpath(".//button[@class='button_button__33qZ0 button_button_type_primary__1O7Bx button_button_size_large__G21Vg']"));
 
+
     public HomePage(WebDriver webDriver) {
         this.webDriver = webDriver;
     }
